@@ -69,26 +69,26 @@
 
 ```java
     String account = "j3UcBBbes7HFgmTLmGkEQQShM2jdHbdGAe";
-    String to = "jNn89aY84G23onFXupUd7bkMode6aKYMt8";
     String secret = "ssWiEpky7Bgj5GFrexxpKexYkeuUv";
+    String to = "jNn89aY84G23onFXupUd7bkMode6aKYMt8";
     AmountInfo amountInfo = new AmountInfo();
-    amountInfo.setCurrency("SWT");
-    amountInfo.setValue("0.01");
-    amountInfo.setIssuer("");
+    amountInfo.setCurrency("SWT");// 转出代币简称
+    amountInfo.setValue("0.001");// 转出代币数量
+    amountInfo.setIssuer("");// 转出代币银关
 
     Payment payment = new Payment();
     payment.as(AccountID.Account, account);
     payment.as(AccountID.Destination, to);
     payment.setAmountInfo(amountInfo);
-    payment.as(Amount.Fee, String.valueOf(Config.FEE));
-    payment.sequence(new UInt32(1));
+    payment.as(Amount.Fee, String.valueOf(Config.FEE));// 交易燃料费
+    payment.sequence(new UInt32(1));// 转出地址序列号
     payment.flags(new UInt32(0));
-    List<String> memos = new ArrayList<String>();
+    List<String> memos = new ArrayList<String>();// 交易备注
     memos.add("SWT转账");
     memos.add("测试数据1");
     memos.add("测试数据2");
     payment.addMemo(memos);
-    SignedTransaction signedTx = payment.sign(secret);
+    SignedTransaction signedTx = payment.sign(secret);// 签名
     System.out.println("tx_blob:" + signedTx.tx_blob);
 ```
 
