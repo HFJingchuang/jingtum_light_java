@@ -90,7 +90,7 @@
     SendRawTransaction.getInstance().transfer(payment, secret, new JCallback() {
 
       public void onFail(Exception arg0) {
-        System.out.println("转账失败，" + arg0);
+        System.out.println("转账失败，错误原因:" + arg0.getMessage());
 
       }
 
