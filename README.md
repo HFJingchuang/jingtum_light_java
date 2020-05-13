@@ -65,6 +65,33 @@
       String secretDec = walletDec.getSecret();
 ```
 
+### 本地签名
+
+```java
+    String account = "j3UcBBbes7HFgmTLmGkEQQShM2jdHbdGAe";
+    String to = "jNn89aY84G23onFXupUd7bkMode6aKYMt8";
+    String secret = "ssWiEpky7Bgj5GFrexxpKexYkeuUv";
+    AmountInfo amountInfo = new AmountInfo();
+    amountInfo.setCurrency("SWT");
+    amountInfo.setValue("0.01");
+    amountInfo.setIssuer("");
+
+    Payment payment = new Payment();
+    payment.as(AccountID.Account, account);
+    payment.as(AccountID.Destination, to);
+    payment.setAmountInfo(amountInfo);
+    payment.as(Amount.Fee, String.valueOf(Config.FEE));
+    payment.sequence(new UInt32(1));
+    payment.flags(new UInt32(0));
+    List<String> memos = new ArrayList<String>();
+    memos.add("SWT转账");
+    memos.add("测试数据1");
+    memos.add("测试数据2");
+    payment.addMemo(memos);
+    SignedTransaction signedTx = payment.sign(secret);
+    System.out.println("tx_blob:" + signedTx.tx_blob);
+```
+
 ### 交易类
 ```java
     // 发起方地址
