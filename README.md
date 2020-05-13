@@ -17,7 +17,7 @@
 <dependency>
   <groupId>com.github.HFJingchuang</groupId>
   <artifactId>jingtum_light_java</artifactId>
-  <version>Tag</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
