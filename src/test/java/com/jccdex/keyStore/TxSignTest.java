@@ -3,22 +3,23 @@ package com.jccdex.keyStore;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.fastjson.JSONObject;
-import com.jccdex.rpc.base.JCallback;
 import com.jch.client.AmountInfo;
+import com.jch.client.Token;
 import com.jch.config.Config;
 import com.jch.core.coretypes.AccountID;
 import com.jch.core.coretypes.Amount;
 import com.jch.core.coretypes.uint.UInt32;
 import com.jch.core.types.known.tx.signed.SignedTransaction;
+import com.jch.core.types.known.tx.txns.ICallback;
 import com.jch.core.types.known.tx.txns.Payment;
-import com.jch.core.types.known.tx.txns.SendRawTransaction;
+import com.jch.core.types.known.tx.txns.Transaction;
 
 public class TxSignTest {
 
 	public static void main(String[] args) {
 //		Sign();
 		Transfer();
+//		getBalance();
 	}
 
 	public static void Sign() throws Exception {
@@ -79,18 +80,37 @@ public class TxSignTest {
 		List<String> memos = new ArrayList<String>();
 		memos.add("测试SWT转账");
 		payment.addMemo(memos);
-		SendRawTransaction.getInstance().transfer(payment, secret, new JCallback() {
+		Transaction.getInstance().transfer(payment, secret, new ICallback() {
 
 			public void onFail(Exception arg0) {
-				System.out.println("转账失败，错误原因:" + arg0.getMessage());
+				System.out.println("转账失败，失败原因:" + arg0.getMessage());
+			}
+
+			public void onResponse(Object response) {
+				System.out.println("转账成功，转账哈希:" + (String) response);
+			}
+		});
+	}
+
+	public static void getBalance() {
+		String address = "jMCPG9cCGU8wj93xMhKbLNbfvQZNJdEmem";
+		Transaction.getInstance().getBalance(address, new ICallback() {
+
+			public void onFail(Exception arg0) {
+				System.out.println("转账失败，失败原因:" + arg0.getMessage());
 
 			}
 
-			public void onResponse(String arg0, String arg1) {
-				if ("0".equals(arg0)) {
-					System.out.println("转账成功，哈希:" + JSONObject.parseObject(arg1).getJSONObject("data").getString("hash"));
-				} else {
-					System.out.println("转账失败，错误原因:" + JSONObject.parseObject(arg1).getString("msg"));
+			public void onResponse(Object response) {
+				if (response != null) {
+					List<Token> tokens = (List) response;
+					for (int i = 0; i < tokens.size(); i++) {
+						System.out.println("代币名称:" + tokens.get(i).getCurrency());
+						System.out.println("代币银关:" + tokens.get(i).getIssuer());
+						System.out.println("总余额:" + tokens.get(i).getValue());
+						System.out.println("冻结余额:" + tokens.get(i).getreezed());
+						System.out.println("=====================================");
+					}
 				}
 			}
 		});
