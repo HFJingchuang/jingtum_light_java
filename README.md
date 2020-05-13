@@ -2,7 +2,7 @@
 
 [![](https://jitpack.io/v/HFJingchuang/jingtum_light_java.svg)](https://jitpack.io/#HFJingchuang/jingtum_light_java)
 
-轻量井通java库，包含钱包创建、keystore、本地签名、转账
+轻量井通java库，包含钱包创建、keystore、余额查询、本地签名、转账
 
 ## 引入
 
@@ -20,7 +20,7 @@
 <dependency>
   <groupId>com.github.HFJingchuang</groupId>
   <artifactId>jingtum_light_java</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
@@ -68,6 +68,31 @@
       String secretDec = walletDec.getSecret();
 ```
 
+### 余额查询
+```java
+    String address = "jMCPG9cCGU8wj93xMhKbLNbfvQZNJdEmem";
+    Transaction.getInstance().getBalance(address, new ICallback() {
+
+    public void onFail(Exception arg0) {
+      System.out.println("转账失败，失败原因:" + arg0.getMessage());
+
+    }
+
+    public void onResponse(Object response) {
+      if (response != null) {
+        List<Token> tokens = (List) response;
+        for (int i = 0; i < tokens.size(); i++) {
+          System.out.println("代币名称:" + tokens.get(i).getCurrency());
+          System.out.println("代币银关:" + tokens.get(i).getIssuer());
+          System.out.println("总余额:" + tokens.get(i).getValue());
+          System.out.println("冻结余额:" + tokens.get(i).getreezed());
+          System.out.println("=====================================");
+        }
+      }
+    }
+    });
+```
+
 ### 本地签名
 
 ```java
@@ -95,7 +120,7 @@
     System.out.println("tx_blob:" + signedTx.tx_blob);
 ```
 
-### 交易类
+### 转账
 ```java
     // 发起方地址
     String account = "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6";
@@ -117,19 +142,14 @@
     List<String> memos = new ArrayList<String>();
     memos.add("测试SWT转账");
     payment.addMemo(memos);
-    SendRawTransaction.getInstance().transfer(payment, secret, new JCallback() {
+    Transaction.getInstance().transfer(payment, secret, new ICallback() {
 
       public void onFail(Exception arg0) {
-        System.out.println("转账失败，错误原因:" + arg0.getMessage());
-
+        System.out.println("转账失败，失败原因:" + arg0.getMessage());
       }
 
-      public void onResponse(String arg0, String arg1) {
-        if ("0".equals(arg0)) {
-          System.out.println("转账成功，哈希:" + JSONObject.parseObject(arg1).getJSONObject("data").getString("hash"));
-        } else {
-          System.out.println("转账失败，错误原因:" + JSONObject.parseObject(arg1).getString("msg"));
-        }
+      public void onResponse(Object response) {
+        System.out.println("转账成功，转账哈希:" + (String) response);
       }
     });
 ```
