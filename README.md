@@ -1,4 +1,7 @@
 # jingtum_light_java
+
+[![](https://jitpack.io/v/HFJingchuang/jingtum_light_java.svg)](https://jitpack.io/#HFJingchuang/jingtum_light_java)
+
 轻量井通java库，包含钱包创建、keystore、本地签名、转账
 
 ## 引入
@@ -17,7 +20,7 @@
 <dependency>
   <groupId>com.github.HFJingchuang</groupId>
   <artifactId>jingtum_light_java</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
