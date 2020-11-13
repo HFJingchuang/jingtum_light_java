@@ -5,7 +5,7 @@
 
 	<groupId>com.jingchuang</groupId>
 	<artifactId>Jintum-light-java</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>Jintum-light-java</name>
