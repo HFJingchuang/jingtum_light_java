@@ -78,9 +78,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-	    	<groupId>com.github.JCCDex</groupId>
+	    	<groupId>com.github.gwang74</groupId>
 	    	<artifactId>jcc_rpc_java</artifactId>
-	    	<version>v2.6</version>
+	    	<version>v2.9.3</version>
 		</dependency>
 	</dependencies>
 </project>

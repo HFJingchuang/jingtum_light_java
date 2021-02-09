@@ -16,7 +16,7 @@ import com.jch.core.types.known.tx.signed.SignedTransaction;
 
 public class Transaction {
 
-	private String mConfigUrl = "weidex.vip";
+	private String mConfigUrl = "uploadletsdex.swtc.top";
 
 	private Transaction() {
 	}
