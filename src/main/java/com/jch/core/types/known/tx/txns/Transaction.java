@@ -91,7 +91,7 @@ public class Transaction {
 
     public String getNodeUrl() {
         nodes = getJintumRPC();
-        int r = new Random().nextInt(nodes.size()) + 1;
+        int r = new Random().nextInt(nodes.size());
         return nodes.get(r);
     }
 
