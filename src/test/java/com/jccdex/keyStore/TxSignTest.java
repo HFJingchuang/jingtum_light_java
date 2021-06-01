@@ -18,8 +18,9 @@ public class TxSignTest {
 
 	public static void main(String[] args) {
 //		Sign();
-		Transfer();
+//		Transfer();
 //		getBalance();
+		getSequence();
 	}
 
 	public static void Sign() throws Exception {
@@ -66,7 +67,7 @@ public class TxSignTest {
 
 	public static void Transfer() {
 		String account = "jBvrdYc6G437hipoCiEpTwrWSRBS2ahXN6";
-		String to = "jKBCwv4EcyvYtD4PafP17PLpnnZ16szQsC";
+		String to = "jNn89aY84G23onFXupUd7bkMode6aKYMt8";
 		String secret = "snBPyRRpE56ea4QGCpTMVTQWoirT2";
 		AmountInfo amountInfo = new AmountInfo();
 		amountInfo.setCurrency("SWT");
@@ -97,7 +98,7 @@ public class TxSignTest {
 		Transaction.getInstance().getBalance(address, new ICallback() {
 
 			public void onFail(Exception arg0) {
-				System.out.println("转账失败，失败原因:" + arg0.getMessage());
+				System.out.println("失败原因:" + arg0.getMessage());
 
 			}
 
@@ -114,5 +115,10 @@ public class TxSignTest {
 				}
 			}
 		});
+	}
+
+	public static void getSequence() {
+		int seq = Transaction.getInstance().getSequence("jZ3Upe4Be53xVVoRqyiXqCkrXBMfegDP9");
+		System.out.println("交易序列："+seq);
 	}
 }

@@ -46,3 +46,11 @@ hs_err_pid*
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
+.idea/qaplug_profiles.xml
+.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_4_0.xml
+.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_4_10.xml
+.idea/libraries/Maven__org_jetbrains_annotations_13_0.xml
+.idea/libraries/Maven__com_squareup_okio_okio_2_8_0.xml
+.idea/libraries/Maven__com_squareup_okhttp3_okhttp_4_9_0.xml
+.idea/libraries/Maven__com_github_gwang74_jcc_rpc_java_v2_9_3.xml
+.idea/inspectionProfiles/Project_Default.xml
